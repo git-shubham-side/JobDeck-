@@ -1,0 +1,24 @@
+{
+  "name": "job-application-tracker",
+  "version": "1.0.0",
+  "description": "job application tracker",
+  "keywords": [
+    "job",
+    "application"
+  ],
+  "homepage": "https://github.com/git-shubham-side/Job-Application-Tracker#readme",
+  "bugs": {
+    "url": "https://github.com/git-shubham-side/Job-Application-Tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/git-shubham-side/Job-Application-Tracker.git"
+  },
+  "license": "ISC",
+  "author": "Shubham Rathod",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test npm run dev"
+  }
+}
