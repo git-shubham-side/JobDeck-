@@ -13,6 +13,14 @@ SCHEMA DESIGN PENGING - USER SCHEMA *
 Pending-------------
 Twilo message Sevice for otp Verifcation
 Jwt Implementation
-Flash Messages for login 
+Flash Messages for login  -- Uses Session
+
+
+
+Current--------
+Dashboard problem -- in registerController Line : 30 & app.js Line 30
+solve the problem objects are sending from both sides
+
+
 
 

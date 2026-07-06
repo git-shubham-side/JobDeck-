@@ -16,6 +16,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//Error Handler -- Middleware
+const errorhandler = require("./middlewares/errorHandler");
+
 // Request Handling
 app.get(["/api/v1/landing", "/"], (req, res) => {
   res.render("Landing/landing");
@@ -40,5 +43,7 @@ app.get("/api/v1/dashboard", (req, res) => {
 app.get("/api/v1/signup", registerGetController);
 // POST : /api/v1/signup
 app.post("/api/v1/signup", registerPostController);
+
+app.use(errorhandler);
 
 module.exports = app;
