@@ -14,13 +14,17 @@ Pending-------------
 Twilo message Sevice for otp Verifcation
 Jwt Implementation
 Flash Messages for login  -- Uses Session
+Login Implementation 
 
 
 
 Current--------
-Dashboard problem -- in registerController Line : 30 & app.js Line 30
-solve the problem objects are sending from both sides
+Dashboard problem -- in registerController Line : 30 & app.js Line 37
+solve the problem, objects are sending from both sides
 
 
 
+Things which will be Non- Comment Later
 
+- Line no: 26 in registerController
+- 
