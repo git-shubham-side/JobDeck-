@@ -1,6 +1,7 @@
 Completed:-----------
-SCHEMA DESIGN PENGING - USER SCHEMA *
-
+SCHEMA DESIGN - USER SCHEMA *
+SCHEMA Password Compare Method *
+Jwt Implementation -- No need shift to session *
 
 
 
@@ -12,19 +13,33 @@ SCHEMA DESIGN PENGING - USER SCHEMA *
 
 Pending-------------
 Twilo message Sevice for otp Verifcation
-Jwt Implementation
 Flash Messages for login  -- Uses Session
 Login Implementation 
 
 
 
 Current--------
-Dashboard problem -- in registerController Line : 30 & app.js Line 37
-solve the problem, objects are sending from both sides
+
+Login Controller work Pending
+Session Created for Signup and strored the id into the session
+
 
 
 
 Things which will be Non- Comment Later
 
-- Line no: 26 in registerController
 - 
+- 
+
+
+TO-DO ---
+
+Error Message in error Handler
+Dashboard EJS page
+
+
+
+
+
+Json Responces Should be clear Later - Give codes here to fast identity
+-- 
