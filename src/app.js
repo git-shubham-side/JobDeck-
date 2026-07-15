@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const path = require("path");
 const User = require("./models/User");
 const session = require("express-session");
+const flash = require("connect-flash");
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -28,6 +29,14 @@ app.use(
     saveUninitialized: false,
   }),
 );
+
+// Flash Setup
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 // FROM DATA PARSING
 app.use(express.urlencoded({ extended: true }));
