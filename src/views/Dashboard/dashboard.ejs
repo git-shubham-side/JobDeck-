@@ -1,101 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobDeck | Dashboard</title>
-    <link rel="icon" href="/logoImage/logo-2.png" />
+    <link rel="icon" href="/logoImage/JD-logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gray-50 flex min-h-screen items-center justify-center p-4 font-sans">
-    
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 p-8 space-y-6">
-      
-      <div class="flex flex-col items-center text-center space-y-2">
-        <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center mb-1">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-blue-600">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-          </svg>
-        </div>
-        <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
-          Dashboard
-        </h1>
-        <p class="text-sm text-gray-500">
-          Welcome to your account
-        </p>
-      </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Smooth custom transitions */
+        .section-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans h-screen flex overflow-hidden">
 
-      <% if (typeof success !== 'undefined' && success.length > 0) { %>
-        <div id="success-alert" class="flex items-center p-4 text-sm text-green-800 border border-green-200 rounded-lg bg-green-50 transition-opacity duration-500" role="alert">
-          <svg class="flex-shrink-0 inline w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-          </svg>
-          <div>
-            <span class="font-medium">Success!</span> <%= success[0] %>
-          </div>
-        </div>
-      <% } %>
+    <div class="fixed top-4 right-4 z-50 space-y-3 w-full max-w-sm">
+        <% if (typeof success !== 'undefined' && success.length > 0) { %>
+            <div id="success-alert" class="flex items-center p-4 text-sm text-green-800 border border-green-200 rounded-lg bg-green-50 shadow-lg transition-opacity duration-500" role="alert">
+                <svg class="flex-shrink-0 inline w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                </svg>
+                <div>
+                    <span class="font-medium">   </span> <%= success[0] %>
+                </div>
+            </div>
+        <% } %>
 
-      <% if (typeof error !== 'undefined' && error.length > 0) { %>
-        <div id="error-alert" class="flex items-center p-4 text-sm text-red-800 border border-red-200 rounded-lg bg-red-50 transition-opacity duration-500" role="alert">
-          <svg class="flex-shrink-0 inline w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
-          </svg>
-          <div>
-            <span class="font-medium">Oops!</span> <%= error[0] %>
-          </div>
-        </div>
-      <% } %>
-
-      <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4">
-        <div class="flex justify-between items-center border-b border-gray-200 pb-3">
-          <span class="text-sm font-medium text-gray-500">First Name</span>
-          <span class="text-sm font-semibold text-gray-900"><%= user.firstName %></span>
-        </div>
-        
-        <div class="flex justify-between items-center border-b border-gray-200 pb-3">
-          <span class="text-sm font-medium text-gray-500">Last Name</span>
-          <span class="text-sm font-semibold text-gray-900"><%= user.lastName %></span>
-        </div>
-        
-        <div class="flex justify-between items-center">
-          <span class="text-sm font-medium text-gray-500">Email</span>
-          <span class="text-sm font-semibold text-gray-900"><%= user.email %></span>
-        </div>
-      </div>
-
-      <form action="/api/v1/logout" method="POST" class="pt-2">
-        <button type="submit" class="w-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 border border-red-200 font-medium py-2.5 px-4 rounded-lg transition-all duration-150 text-sm flex justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-          </svg>
-          Logout
-        </button>
-      </form>
-      
+        <% if (typeof error !== 'undefined' && error.length > 0) { %>
+            <div id="error-alert" class="flex items-center p-4 text-sm text-red-800 border border-red-200 rounded-lg bg-red-50 shadow-lg transition-opacity duration-500" role="alert">
+                <svg class="flex-shrink-0 inline w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+                </svg>
+                <div>
+                    <span class="font-medium">Oops!</span> <%= error[0] %>
+                </div>
+            </div>
+        <% } %>
     </div>
 
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex">
+        <div>
+            <div class="h-16 flex items-center gap-3 px-6 border-b border-gray-100 text-blue-600">
+                <i data-lucide="layers" class="w-7 h-7"></i>
+                <span class="text-xl font-bold tracking-tight text-gray-900">JobDeck</span>
+            </div>
+            <nav class="p-4 space-y-1">
+                <a href="#" data-target="dashboard-section" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl bg-blue-50 text-blue-600 transition-all">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
+                <a href="#" data-target="jobs-section" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i> Jobs
+                </a>
+                <a href="#" data-target="internships-section" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i> Internships
+                </a>
+                <a href="#" data-target="profile-section" class="nav-item flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
+                    <i data-lucide="user" class="w-5 h-5"></i> My Profile
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-gray-100">
+            <form action="/api/v1/logout" method="POST">
+                <button type="submit" class="w-full bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 border border-red-100 font-medium py-2.5 px-4 rounded-xl transition-all text-sm flex justify-center items-center gap-2">
+                    <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col overflow-hidden">
+        
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-10">
+            <div class="flex items-center bg-gray-100 border border-gray-200 rounded-xl px-3 py-1.5 w-80 gap-2">
+                <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
+                <input type="text" placeholder="Search jobs, internships..." class="bg-transparent border-none outline-none text-sm w-full placeholder-gray-400">
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-gray-600 relative">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-blue-600 rounded-full"></span>
+                </button>
+                <div class="flex items-center gap-3 pl-2 border-l border-gray-200">
+                    <img src="https://ui-avatars.com/api/?name=<%= user.firstName %>+<%= user.lastName %>&background=2563EB&color=fff" alt="Avatar" class="w-8 h-8 rounded-full shadow-sm">
+                    <span class="text-sm font-medium text-gray-700 hidden sm:inline"><%= user.firstName %></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 p-6 overflow-y-auto max-w-5xl w-full mx-auto">
+            
+            <section id="dashboard-section" class="content-section space-y-6">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Welcome back, <%= user.firstName %>! 👋</h1>
+                    <p class="text-sm text-gray-500 mt-1">Here's your job search and networking summary for today.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl"><i data-lucide="send" class="w-6 h-6"></i></div>
+                        <div><h3 class="text-xl font-bold">12</h3><p class="text-xs text-gray-500">Applications Sent</p></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div class="p-3 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="bookmark" class="w-6 h-6"></i></div>
+                        <div><h3 class="text-xl font-bold">8</h3><p class="text-xs text-gray-500">Saved Openings</p></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4">
+                        <div class="p-3 bg-green-50 text-green-600 rounded-xl"><i data-lucide="eye" class="w-6 h-6"></i></div>
+                        <div><h3 class="text-xl font-bold">45</h3><p class="text-xs text-gray-500">Profile Views</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="jobs-section" class="content-section space-y-4 hidden">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Explore Full-Time Jobs</h1>
+                    <p class="text-sm text-gray-500 mt-1">Curated verified career opportunities for you.</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">Senior Frontend Engineer</h3>
+                            <p class="text-sm text-gray-500">TechCorp India • Full-time • Bengaluru (Remote)</p>
+                        </div>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-2 px-4 rounded-xl shadow-sm transition-all self-start sm:self-center">Apply Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="internships-section" class="content-section space-y-4 hidden">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Available Internships</h1>
+                    <p class="text-sm text-gray-500 mt-1">Kickstart your experience with trending tech internships.</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="font-semibold text-gray-900 text-lg">Full Stack Web Intern</h3>
+                            <p class="text-sm text-gray-500">GrowthMinds • 6 Months • Hybrid</p>
+                        </div>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm py-2 px-4 rounded-xl shadow-sm transition-all self-start sm:self-center">Apply Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="profile-section" class="content-section space-y-6 hidden">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">My Profile</h1>
+                    <p class="text-sm text-gray-500 mt-1">Your registered professional identity details.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="h-28 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+                    <div class="px-6 pb-6 relative">
+                        <div class="absolute -top-12 left-6">
+                            <img src="https://ui-avatars.com/api/?name=<%= user.firstName %>+<%= user.lastName %>&background=0A66C2&color=fff&size=128" alt="Profile pic" class="w-24 h-24 rounded-2xl border-4 border-white shadow-md bg-white">
+                        </div>
+                        
+                        <div class="pt-16 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-gray-100 pb-6">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900"><%= user.firstName %> <%= user.lastName %></h2>
+                                <p class="text-sm text-gray-500"><%= user.email %></p>
+                            </div>
+                            <button class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium text-sm py-2 px-4 rounded-xl transition-all self-start sm:self-center">Edit Profile</button>
+                        </div>
+
+                        <div class="mt-6 space-y-4 max-w-xl">
+                            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                                <span class="text-sm font-medium text-gray-400">First Name</span>
+                                <span class="text-sm font-semibold text-gray-800"><%= user.firstName %></span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                                <span class="text-sm font-medium text-gray-400">Last Name</span>
+                                <span class="text-sm font-semibold text-gray-800"><%= user.lastName %></span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2">
+                                <span class="text-sm font-medium text-gray-400">Email Address</span>
+                                <span class="text-sm font-semibold text-gray-800"><%= user.email %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        const successAlert = document.getElementById('success-alert');
-        const errorAlert = document.getElementById('error-alert');
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-        // Alert ko fade out aur remove karne ka function
-        const autoHide = (element) => {
-          if (element) {
-            setTimeout(() => {
-              element.classList.add('opacity-0'); // Tailwind opacity zero transition triggers
-              setTimeout(() => {
-                element.remove(); // DOM se delete kar dega text container ko
-              }, 500); // 0.5s fade effect ke liye delay
-            }, 3000); // 3 seconds tak message dikhega
-          }
-        };
+        window.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Flash Alerts Auto Hide Feature ---
+            const successAlert = document.getElementById('success-alert');
+            const errorAlert = document.getElementById('error-alert');
 
-        autoHide(successAlert);
-        autoHide(errorAlert);
-      });
+            const autoHide = (element) => {
+                if (element) {
+                    setTimeout(() => {
+                        element.classList.add('opacity-0');
+                        setTimeout(() => {
+                            element.remove();
+                        }, 500); 
+                    }, 3000); 
+                }
+            };
+
+            autoHide(successAlert);
+            autoHide(errorAlert);
+
+            // --- 2. Dynamic Section Switcher ---
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.content-section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Active State Tailwind Styles for Navbar
+                    navItems.forEach(nav => {
+                        nav.classList.remove('bg-blue-50', 'text-blue-600');
+                        nav.classList.add('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900');
+                    });
+                    
+                    item.classList.add('bg-blue-50', 'text-blue-600');
+                    item.classList.remove('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900');
+
+                    // Section Display toggle
+                    sections.forEach(sec => sec.classList.add('hidden'));
+                    const targetId = item.getAttribute('data-target');
+                    document.getElementById(targetId).classList.remove('hidden');
+                });
+            });
+        });
     </script>
-
-  </body>
+</body>
 </html>
