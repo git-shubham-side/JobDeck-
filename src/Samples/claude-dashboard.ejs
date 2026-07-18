@@ -1,0 +1,13 @@
+(req, res) => {
+    res.render('dashboard', {
+        recruiterName: "Alex",
+        stats: {
+            activeJobs: 12,
+            totalApplications: 148,
+            interviewsScheduled: 8
+        },
+        recentApplicants: [
+            { id: 1, name: 'Sarah Jenkins', role: 'Frontend Developer', date: 'Today', status: 'Pending' }
+        ]
+    });
+})

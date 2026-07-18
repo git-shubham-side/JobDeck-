@@ -37,8 +37,11 @@ Things which will be Non- Comment Later
 
 TO-DO ---
 
-Error Message in error Handler
-Dashboard EJS page
+Update the signup page and provide the option of signup as student of requireter 
+Update the schema accordingly
+create admin dashboard page
+
+
 
 
 

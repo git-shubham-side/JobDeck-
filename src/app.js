@@ -50,20 +50,39 @@ app.use(express.json());
 //Error Handler -- Middleware
 const errorhandler = require("./middlewares/errorHandler");
 
+//Admin MVC do it after
+const adminSignupController = require("./controllers/adminSignupController");
+
 // Request Handling
 app.get(["/api/v1/landing", "/"], (req, res) => {
   res.render("Landing/landing");
+});
+app.get("/testing", (req, res) => {
+  res.render("Admin-dashboard/admin-dashboard");
 });
 
 //Login --> /api/v1/login
 app.use(loginRoutes);
 
-//Signup --> /api/v1/signup
+//Signup for Student --> /api/v1/signup
 app.use(signupRoutes);
+
+//Signup for Recuriter --> /api/v1/signup
+app.get("/api/v1/signup/recruiter", (req, res) => {
+  res.render("Recuriter/recruiter-signup");
+});
+app.post("/api/v1/signup/recruiter", adminSignupController);
 
 //Dasbhoard
 //GET : /api/v1/dashboard
 app.use(dashboardRoutes);
+
+// Dashboard Admin
+// GET: /api/v1/signup/recuriter
+app.get("/api/v1/admin/dashboard", (req, res) => {
+  console.log("---------------", res.locals.success);
+  res.render("Admin-dashboard/admin-dashboard");
+});
 
 //Logout Routes
 //POST : /api/v1/logout

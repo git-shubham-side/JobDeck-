@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard | JobDeck</title>
+    <!-- Google Fonts for a clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4F46E5; /* Indigo */
+            --primary-hover: #4338CA;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar Styles --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 0;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 0 1.5rem 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            background-color: #EEF2FF;
+            color: var(--primary);
+        }
+
+        /* --- Main Content Styles --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .header {
+            background-color: var(--card-bg);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* --- Dashboard Grid --- */
+        .dashboard-container {
+            padding: 2rem;
+        }
+
+        .welcome-text {
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 0.75rem;
+            background-color: #EEF2FF;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-info p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* --- Table Styles --- */
+        .recent-section {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .recent-section h2 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status.pending { background-color: #FEF3C7; color: #D97706; }
+        .status.reviewed { background-color: #DBEAFE; color: #2563EB; }
+        .status.hired { background-color: #D1FAE5; color: #059669; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-briefcase"></i>
+            JobDeck
+        </div>
+        <ul class="nav-links">
+            <li><a href="/dashboard" class="active"><i class="fa-solid fa-chart-line"></i> Overview</a></li>
+            <li><a href="/jobs"><i class="fa-solid fa-list"></i> Manage Jobs</a></li>
+            <li><a href="/applicants"><i class="fa-solid fa-users"></i> Applicants</a></li>
+            <li><a href="/messages"><i class="fa-regular fa-envelope"></i> Messages</a></li>
+            <li style="margin-top: 2rem;"><a href="/settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            <li><a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+       
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="search-bar">
+                <!-- Can add a search input here if needed later -->
+            </div>
+            <div class="user-profile">
+                <button class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Post New Job
+                </button>
+                <div class="avatar">
+                    <!-- Dynamic Initial -->
+                    <%= recruiterName ? recruiterName.charAt(0).toUpperCase() : "Shubham" %>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Body -->
+        <div class="dashboard-container">
+            <div class="welcome-text">
+                <h1>Welcome back, <%= recruiterName || 'Admin' %></h1>
+                <p style="color: var(--text-muted); margin-top: 0.25rem;">Here is what's happening with your job postings today.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-suitcase"></i></div>
+                    <div class="stat-info">
+                        <h3><%= stats ? stats.activeJobs : '0' %></h3>
+                        <p>Active Jobs</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+                    <div class="stat-info">
+                        <h3><%= stats ? stats.totalApplications : '0' %></h3>
+                        <p>Total Applications</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="stat-info">
+                        <h3><%= stats ? stats.interviewsScheduled : '0' %></h3>
+                        <p>Interviews Scheduled</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applicants Table -->
+            <div class="recent-section">
+                <h2>Recent Applications</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Candidate Name</th>
+                            <th>Applied Role</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- EJS Loop for dynamic data -->
+                        <% if (typeof recentApplicants !== 'undefined' && recentApplicants.length > 0) { %>
+                            <% recentApplicants.forEach(applicant => { %>
+                                <tr>
+                                    <td style="font-weight: 500;"><%= applicant.name %></td>
+                                    <td style="color: var(--text-muted);"><%= applicant.role %></td>
+                                    <td style="color: var(--text-muted);"><%= applicant.date %></td>
+                                    <td>
+                                        <span class="status <%= applicant.status.toLowerCase() %>">
+                                            <%= applicant.status %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="/applicant/<%= applicant.id %>" style="color: var(--primary); text-decoration: none; font-weight: 500;">View</a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <!-- Fallback for empty state or design preview -->
+                            <tr>
+                                <td style="font-weight: 500;">Sarah Jenkins</td>
+                                <td style="color: var(--text-muted);">Frontend Developer</td>
+                                <td style="color: var(--text-muted);">Today, 10:23 AM</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 500;">View</a></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 500;">Michael Chen</td>
+                                <td style="color: var(--text-muted);">Product Manager</td>
+                                <td style="color: var(--text-muted);">Yesterday</td>
+                                <td><span class="status reviewed">Reviewed</span></td>
+                                <td><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 500;">View</a></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

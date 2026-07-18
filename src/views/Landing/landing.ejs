@@ -14,7 +14,7 @@
         <!-- Logo & Brand -->
         <div class="brand-header">
           <div class="logo-icon">
-            <i data-lucide="building-2"></i>
+            <img src="../../logoImage/JD-logo.png" alt="JobDeck Logo" />
           </div>
           <h2>JobDeck</h2>
         </div>
@@ -71,31 +71,50 @@
           </div>
         </div>
 
-        <!-- Call to Action -->
-        <button
-          class="cta-button"
-          id="get-started-btn"
-          onclick="redirectPage()"
-        >
-          Get Started for Free
-        </button>
+        <!-- Call to Action: Student vs Recruiter -->
+        <div class="cta-group">
+          <a href="/api/v1/signup" class="cta-button cta-primary">
+            <i data-lucide="graduation-cap"></i>
+            Sign up as Student
+          </a>
+          <a href="/api/v1/signup/recruiter" class="cta-button cta-secondary">
+            <i data-lucide="briefcase"></i>
+            Sign up as Recruiter
+          </a>
+        </div>
 
         <p class="login-prompt">
-          Already have an account? <a href="/api/v1/login">Log in</a>
+          Already have an account?
+          <a href="/api/v1/login" style="text-decoration: none; color: black"
+            >Log in</a
+          >
         </p>
       </main>
 
       <!-- Footer -->
       <footer class="page-footer">
-        <div class="footer-links">
+        <!-- <div class="footer-links">
           <a href="#">Features</a>
           <a href="#">Pricing</a>
           <a href="#">Resources</a>
-        </div>
-        <p class="copyright">&copy; 2026 JobDeck. All rights reserved.</p>
+        </div> -->
+        <p class="copyright">
+          Developed by
+          <b
+            ><a
+              href="https://linkedin.com/in/shubham-rathod-dev/"
+              style="text-decoration: none; color: black"
+              >Shubham Rathod</a
+            ></b
+          >
+        </p>
       </footer>
     </div>
 
     <script src="/Landing/landing.js"></script>
+    <script>
+      // Render lucide icons after DOM is ready
+      if (window.lucide) lucide.createIcons();
+    </script>
   </body>
 </html>

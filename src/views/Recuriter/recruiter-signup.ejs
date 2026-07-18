@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobDeck | Recruiter Sign Up</title>
+    <link rel="icon" href="../public/logoImage/JD-logo.png" />
+    <link rel="stylesheet" href="/Recruiter/recruiter-signup.css" />
+  </head>
+  <body>
+
+    <div class="page-wrapper">
+      <div class="signup-card">
+
+        <div class="brand-header">
+          <div class="logo-icon">
+            <img src="/logoImage/JD-logo.png" alt="jobDeck-logo" />
+          </div>
+          <h1>JobDeck <span class="badge">for Business</span></h1>
+          <p class="subtitle">Post jobs, manage applicants, and hire faster.</p>
+        </div>
+
+        <% if (typeof error !== 'undefined' && error.length > 0) { %>
+          <div id="error-alert" class="error-alert">
+            <span class="error-title">Oops!</span> <%= error[0] %>
+          </div>
+        <% } %>
+
+        <form action="/api/v1/signup/recruiter" method="POST" class="signup-form">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" required placeholder="eg: Shubham Rathod" />
+            </div>
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input type="text" id="designation" name="designation" required placeholder="HR Manager" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input type="text" id="companyName" name="companyName" required placeholder="Acme Technologies Pvt. Ltd." />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companyWebsite">Company Website</label>
+              <input type="url" id="companyWebsite" name="companyWebsite" placeholder="https://jobdeck.com" />
+            </div>
+            <div class="form-group">
+              <label for="companySize">Company Size</label>
+              <select id="companySize" name="companySize" required>
+                <option value="" disabled selected>Select size</option>
+                <option value="1-10">1–10 employees</option>
+                <option value="11-50">11–50 employees</option>
+                <option value="51-200">51–200 employees</option>
+                <option value="201-500">201–500 employees</option>
+                <option value="500+">500+ employees</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="workEmail">Work Email</label>
+            <input type="email" id="workEmail" name="workEmail" required placeholder="eg: shubham@jobdeck.com" />
+            <span class="hint">Use your official company email — personal domains (gmail, yahoo) may be flagged for review.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="password" name="password" required placeholder="At least 8 characters" />
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">Show</button>
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Recruiter Policy</a>, and confirm I am authorized to post jobs on behalf of my company.
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">Create Recruiter Account</button>
+        </form>
+
+        <p class="footer-link">
+          Already have an account?
+          <a href="/api/v1/login">Sign in</a>
+        </p>
+        <p class="footer-link muted">
+          Looking for a job instead? <a href="/api/v1/signup">Sign up as a Student</a>
+        </p>
+
+      </div>
+    </div>
+
+    <script src="/Recruiter/recruiter-signup.js"></script>
+  </body>
+</html>
